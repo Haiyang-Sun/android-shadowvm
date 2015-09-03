@@ -4,7 +4,7 @@
 
 ##Installation
 
-###Install DiSL for Android
+###Install DiSL (for Android)
 ####Build from source code
 [![Download DiSL-Android-src.zip]](http://dag.inf.usi.ch/downloads/)
 
@@ -34,5 +34,14 @@
 
 [![Download nexus5-emulator-image.zip]](http://dag.inf.usi.ch/downloads/)
 
-[![Download source-patch-for-4.4_r1)..zip]](http://dag.inf.usi.ch/downloads/)
+[![Download source-patch-for-4.4_r1)..zip]](http://dag.inf.usi.ch/downloads/), including three parts:
 
+* $SOURCE_ROOT/external/ShadowVMService => implementation of the shadowvm service
+
+* $SOURCE_ROOT/system/core/init.rc => update init.rc to auto-start the shadowvm service
+
+* $SOURCE_ROOT/dalvik => dalvik patch to emit events of interest for instrumentation and analysis
+
+* $SOURCE_ROOT/native/libs(include)/binder => emit binder IPC events
+
+##Publications
