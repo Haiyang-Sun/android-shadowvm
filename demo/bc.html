@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Demo Android ShadowVM</title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="google-code-prettify/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/prettify.css">
+		<script>
+		function setPacket(str){
+			$("#packetContent").html(str);
+		}
+		</script>
+	</head>
+	<body>
+		<div class = "container" id = "navigator">
+			<center><h1>Demos for Android ShadowVM</h1></center>
+		</div>
+		<div class = "container" id = "body">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#bc-tab" aria-controls="bc-tab" role="tab" data-toggle="tab">Branch Coverage</a>
+				</li>
+				<li role="presentation">
+					<a href="#net-tab" aria-controls="net-tab" role="tab" data-toggle="tab">Network track</a>
+				</li>
+				<li role="presentation">
+					<a href="#permission-tab" aria-controls="permission-tab" role="tab" data-toggle="tab">Permission Usage</a>
+				</li>
+			</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="bc-tab">
+			<div class = "col-md-4">
+				<div id="bc">
+					<h3><a href="#">Branch coverage</a></h2>
+					<div id="bc-details">
+						<ol>
+							<li>
+							<a href="#">instrumentation</a>
+							</li>
+							<li>
+							<a href="#">analysis</a>
+							</li>
+							<li>
+							<a href="#">overall result</a>
+							</li>
+							<li>
+							<a href="#">branch token history</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-8" id = "dashboard-bc">
+				<div id = "code-bc1">
+					<?prettify lang=java?>
+					<pre style="font-size:9px">
+public class DiSLClass {
+
+	@SyntheticLocal
+	public static boolean encounterBranch = false;
+}
+					</pre>
+				</div>
+				<div id = "bc-single">
+					<h3> branch token history </h3>
+					<table class="table table-condensed table-bordered table-striped" >
+						<tr>
+							<th>
+								process
+							</th>
+							<th>
+								class name
+							</th>
+							<th>
+								method signature
+							</th>
+							<th>
+								total branches
+							</th>
+							<th>
+								token index
+							</th>
+							<th>
+								token times
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div id = "bc-overall">
+					<h3> branch coverage</h3>
+					<table class="table table-condensed table-bordered table-striped" >
+						<tr>
+							<th>
+								process	
+							</th>
+							<th>
+								class name
+							</th>
+							<th>
+								method signature
+							</th>
+							<th>
+								covered branches
+							</th>
+							<th>
+								total branches
+							</th>
+							<th>
+								coverage
+							</th>
+						</tr>
+						<tr>
+							<td>
+								process
+							</td>
+							<td>
+								java.lang.Object
+							</td>
+							<td>
+								()
+							</td>
+							<td>
+								9
+							</td>
+							<td>
+								10
+							</td>
+							<td>
+								0.9
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="net-tab">
+			<div class = "col-md-4">
+				<div id="net">
+					<h3><a href="#">network track</a></h2>
+					<div id="net-details">
+						<ol>
+							<li>
+							<a href="#">instrumentation</a>
+							</li>
+							<li>
+							<a href="#">analysis</a>
+							</li>
+							<li>
+							<a href="#">network history</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-8" id = "dashboard-net">
+				<div id = "code-net0">
+					<?prettify lang=java?>
+					<pre style="font-size:9px">
+public class DiSLClass {
+
+}
+					</pre>
+				</div>
+				<div id = "network">
+					<h3> network track</h3>
+					<table class="table table-condensed table-bordered table-striped" >
+						<tr>
+							<th>
+								process
+							</th>
+							<th>
+								thread-id
+							</th>
+							<th>
+								type	
+							</th>
+							<th>
+								file descriptor
+							</th>
+							<th>
+								IP
+							</th>
+							<th>
+								port
+							</th>
+							<th>
+								data size(bytes)
+							</th>
+						</tr>
+						<tr class="danger">
+							<td>
+								1999
+							</td>
+							<td>
+								abc
+							</td>
+							<td >
+								<a data-toggle="modal" data-target="#packet" onclick="setPacket('00011011(^[) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 0000000    0(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^    @) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 11011001(?) 11001011(?) 10010101(?) 01111111(^?) 111    01100(?) 00001000(^H) 00110001(1) 11000000(?)')">
+									send
+								</a>
+							</td>
+							<td>
+								12312313
+							</td>
+							<td>
+								123:0:0:1
+							</td>
+							<td>
+								1111
+							</td>
+							<td>
+								1000
+							</td>
+						</tr>
+						<tr class="warning">
+							<td>
+								1999
+							</td>
+							<td>
+								abc
+							</td>
+							<td >
+								<a data-toggle="modal" data-target="#packet" onclick="setPacket('00011011(^[) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 0000000    0(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^    @) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 00000000(^@) 11011001(?) 11001011(?) 10010101(?) 01111111(^?) 111    01100(?) 00001000(^H) 00110001(1) 11000000(?)')">
+									recv
+								</a>
+							</td>
+							<td>
+								12312313
+							</td>
+							<td>
+								123:0:0:1
+							</td>
+							<td>
+								1111
+							</td>
+							<td>
+								/
+							</td>
+						</tr>
+						<tr class="info">
+							<td>
+								1999
+							</td>
+							<td>
+								abc
+							</td>
+							<td >
+								connect
+							</td>
+							<td>
+								12312313
+							</td>
+							<td>
+								123:0:0:1
+							</td>
+							<td>
+								1111
+							</td>
+							<td>
+								/
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="permission-tab">
+
+			<div class = "col-md-4">
+				<div id="permission">
+					<h3><a href="#">permission use detection</a></h2>
+					<div id="permission-details">
+						<ol>
+							<li>
+							<a href="#">instrumentation</a>
+							</li>
+							<li>
+							<a href="#">analysis</a>
+							</li>
+							<li>
+							<a href="#">permissions detected</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-8" id = "dashboard-permission">
+				<div id = "code">
+					<?prettify lang=java?>
+					<pre style="font-size:9px">
+public class DiSLClass {
+
+}
+					</pre>
+				</div>
+				<div id = "permission">
+					<h3> permission use </h3>
+					<table class="table table-condensed table-bordered table-striped" >
+						<tr>
+							<th>
+								process
+							</th>
+							<th>
+								thread-id
+							</th>
+							<th>
+								permission(s)
+							</th>
+							<th>
+								call stack
+							</th>
+						</tr>
+						<tr class="warning">
+							<td>
+								afda()
+							</td>
+							<td>
+								123
+							</td>
+							<td>
+								ANDROID_ADFAF <br/>
+								ANDROID_ADFAF
+							</td>
+							<td>
+								<a data-toggle="modal" data-target="#packet" onclick="setPacket('I/PermissionUsage       : Calling Stack in proc ch.usi.dag.android.example(1951:1) <br/> I/PermissionUsage       : #0:android/telephony/SmsManager.sendTextMessage <br/> I/PermissionUsage       : #3:ch/usi/dag/android/example/Client.onSendSMS')">
+									open
+								</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="stack" tabindex="-1" role="dialog" aria-labelledby="packetLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">call stack</h4>
+				</div>
+				<div class="modal-body" id="callstack">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="packet" tabindex="-1" role="dialog" aria-labelledby="packetLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">packet details</h4>
+				</div>
+				<div class="modal-body" id="packetContent">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
