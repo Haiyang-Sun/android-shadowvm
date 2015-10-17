@@ -10,12 +10,73 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="css/prettify.css">
 		<script>
+		setInterval(loopback, 400);
+		$.ajax({
+			url:"data/bc0.java",  
+			success:function(data) {
+				$("#bc_code0").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/bc1.java",  
+			success:function(data) {
+				$("#bc_code1").html(data); 
+			}
+		});
+
+		function update_bc(bc_option){
+			if(bc_option == 0)
+				$("#code_bc0").show();
+			else
+				$("#code_bc0").hide();
+			if(bc_option == 1)
+				$("#code_bc1").show();
+			else
+				$("#code_bc1").hide();
+			if(bc_option == 2)
+				$("#bc_single_table").show();
+			else
+				$("#bc_single_table").hide();
+			if(bc_option == 3)
+				$("#bc_overall_table").show();
+			else
+				$("#bc_overall_table").hide();
+		}
+
+		function loopback(){
+			$.ajax({
+				url:"data/branch-takens.log",  
+				success:function(data) {
+					$("#bc_single_table").html(data); 
+				}
+			});
+			$.ajax({
+				url:"data/branch-overall.log",  
+				success:function(data) {
+					$("#bc_overall_table").html(data); 
+				}
+			});
+			$.ajax({
+				url:"data/permission.log",  
+				success:function(data) {
+					$("#permission_table").html(data); 
+				}
+			});
+		}
+
 		function setPacket(str){
 			$("#packetContent").html(str);
 		}
+
+		function onBodyLoad(){
+			loopback();
+			update_bc(-1);
+		}
+
+
 		</script>
 	</head>
-	<body>
+	<body onload="onBodyLoad()">
 		<div class = "container" id = "navigator">
 			<center><h1>Demos for Android ShadowVM</h1></center>
 		</div>
@@ -39,100 +100,38 @@
 					<div id="bc-details">
 						<ol>
 							<li>
-							<a href="#">instrumentation</a>
+							<a href="#" onclick="update_bc(0)">instrumentation</a>
 							</li>
 							<li>
-							<a href="#">analysis</a>
+							<a href="#" onclick="update_bc(1)">analysis</a>
 							</li>
 							<li>
-							<a href="#">overall result</a>
+							<a href="#" onclick="update_bc(2)">branch token history</a>
 							</li>
 							<li>
-							<a href="#">branch token history</a>
+							<a href="#" onclick="update_bc(3)">branch overall report</a>
 							</li>
 						</ol>
 					</div>
 				</div>
 			</div>
 			<div class = "col-md-8" id = "dashboard-bc">
-				<div id = "code-bc1">
+				<div id = "code_bc0">
 					<?prettify lang=java?>
-					<pre style="font-size:9px">
-public class DiSLClass {
-
-	@SyntheticLocal
-	public static boolean encounterBranch = false;
-}
+					<pre id = "bc_code0" style="font-size:9px">
 					</pre>
 				</div>
-				<div id = "bc-single">
-					<h3> branch token history </h3>
-					<table class="table table-condensed table-bordered table-striped" >
-						<tr>
-							<th>
-								process
-							</th>
-							<th>
-								class name
-							</th>
-							<th>
-								method signature
-							</th>
-							<th>
-								total branches
-							</th>
-							<th>
-								token index
-							</th>
-							<th>
-								token times
-							</th>
-						</tr>
+				<div id = "code_bc1">
+					<?prettify lang=java?>
+					<pre id = "bc_code1" style="font-size:9px">
+					</pre>
+				</div>
+				<div id = "bc_single">
+					<table id = "bc_single_table" class="table table-condensed table-bordered table-striped" >
 					</table>
 				</div>
-				<div id = "bc-overall">
-					<h3> branch coverage</h3>
-					<table class="table table-condensed table-bordered table-striped" >
-						<tr>
-							<th>
-								process	
-							</th>
-							<th>
-								class name
-							</th>
-							<th>
-								method signature
-							</th>
-							<th>
-								covered branches
-							</th>
-							<th>
-								total branches
-							</th>
-							<th>
-								coverage
-							</th>
-						</tr>
-						<tr>
-							<td>
-								process
-							</td>
-							<td>
-								java.lang.Object
-							</td>
-							<td>
-								()
-							</td>
-							<td>
-								9
-							</td>
-							<td>
-								10
-							</td>
-							<td>
-								0.9
-							</td>
-						</tr>
+				<div id = "bc_overall">
+					<table id="bc_overall_table" class="table table-condensed table-bordered table-striped" >
 					</table>
 				</div>
 			</div>
@@ -289,31 +288,14 @@ public class DiSLClass {
 				</div>
 			</div>
 			<div class = "col-md-8" id = "dashboard-permission">
-				<div id = "code">
+				<div id = "permission_code_div0">
 					<?prettify lang=java?>
-					<pre style="font-size:9px">
-public class DiSLClass {
-
-}
+					<pre style="font-size:9px" id="permission_code0">
 					</pre>
 				</div>
 				<div id = "permission">
 					<h3> permission use </h3>
-					<table class="table table-condensed table-bordered table-striped" >
-						<tr>
-							<th>
-								process
-							</th>
-							<th>
-								thread-id
-							</th>
-							<th>
-								permission(s)
-							</th>
-							<th>
-								call stack
-							</th>
-						</tr>
+					<table class="table table-condensed table-bordered table-striped" id="permission_table" >
 						<tr class="warning">
 							<td>
 								afda()
