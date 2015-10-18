@@ -1,65 +1,345 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
 	<head>
-		<title>reading file</title>
-		<script type="text/javascript">
-
-			setInterval(loopback, 1000);
-
-			function loopback(){
-				readText("f0");
-				readText("f1");
-				readText("f2");
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>Demo Android ShadowVM</title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="google-code-prettify/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/prettify.css">
+		<script>
+		$.ajax({
+			url:"data/bc0.java",  
+			success:function(data) {
+				$("#bc_code0").html(data); 
 			}
+		});
+		$.ajax({
+			url:"data/bc0.java",  
+			success:function(data) {
+				$("#bc_code0").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/network0.java",  
+			success:function(data) {
+				$("#net_code0").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/network1.java",  
+			success:function(data) {
+				$("#net_code1").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/permission0.java",  
+			success:function(data) {
+				$("#permission_code0").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/permission1.java",  
+			success:function(data) {
+				$("#permission_code1").html(data); 
+			}
+		});
 
-function readText(inputId){
-	var that = document.getElementById(inputId);
-	if(that.files && that.files[0]){
-		var reader = new FileReader();
-		reader.onload = function (e) {  
-			var output=e.target.result;
+		function update_bc(bc_option){
+			if(bc_option == 0)
+				$("#code_bc0").show();
+			else
+				$("#code_bc0").hide();
+			if(bc_option == 1)
+				$("#code_bc1").show();
+			else
+				$("#code_bc1").hide();
+			if(bc_option == 2) {
+				$("#bc_single").show();
+				loopback_bc();
+			} else {
+				$("#bc_single").hide();
+			}
+			if(bc_option == 3) {
+				$("#bc_overall").show();
+				loopback_bc();
+			} else {
+				$("#bc_overall").hide();
+			}
+		}
+		function update_net(net_option){
+			if(net_option == 0)
+				$("#code_net0").show();
+			else
+				$("#code_net0").hide();
+			if(net_option == 1)
+				$("#code_net1").show();
+			else
+				$("#code_net1").hide();
+			if(net_option == 2) {
+				$("#network_table").show();
+				loopback_net();
+			} else {
+				$("#network_table").hide();
+			}
+		}
+		function update_permission(permission_option){
+			if(permission_option == 0)
+				$("#code_permission0").show();
+			else
+				$("#code_permission0").hide();
+			if(permission_option == 1)
+				$("#code_permission1").show();
+			else
+				$("#code_permission1").hide();
+			if(permission_option == 2) {
+				$("#permission").show();
+				loopback();
+			} else {
+				$("#permission").hide();
+			}
+		}
 
-			output=output.replace(/\n/g, "<br/>");
-			output=output.replace(/<init>/g, "()");
+		function updatesingle(){
+			$.ajax({
+				url:"data/branch-takens.log",  
+				success:function(data) {
+					$("#bc_single_table").html(data); 
+				}
+			});
+		}
 
-			document.getElementById(inputId+"Div").innerHTML= output;
-		};//end onload()
-		reader.readAsText(that.files[0]);
-	}//end if html5 filelist support
-} 
-function setVisible(idx){
-	var div;
-    div	= document.getElementById(""+idx);
-	div.style.display = 'block';
-	idx = (idx+1)%3;
-    div	= document.getElementById(""+idx);
-	div.style.display = 'none';
-	idx = (idx+1)%3;
-    div	= document.getElementById(""+idx);
-	div.style.display = 'none';
-}
-</script>
-																																																			</head>
-																																																			<body>
-																																																				<div id="header"> 
-																																																					<a href="#0" onclick="setVisible(0)">branch coverage</a>
-																																																					<a href="#1" onclick="setVisible(1)">network usage</a>
-																																																					<a href="#2" onclick="setVisible(2)">permission check</a>
-																																																			   	</div>
-																																																				<div id="0">
-																																																					<div id="f0Div">
-																																																					</div>
-																																																					<input type="file" id='f0' />
-																																																				</div>
-																																																				<div id="1">
-																																																					<div id="f1Div">
-																																																					</div>
-																																																					<input type="file" id='f1' />
-																																																				</div>
-																																																				<div id="2">
-																																																					<div id="f2Div">
-																																																					</div>
-																																																					<input type="file" id='f2' />
-																																																				</div>
-																																																			</body>
-																																																		</html>
+		function loopback_bc(){
+			$.ajax({
+				url:"data/branch-overall.log",  
+				success:function(data) {
+					$("#bc_overall_table").html(data); 
+				}
+			});
+			updatesingle();
+		}
+
+		function loopback_net(){
+			$.ajax({
+				url:"data/network.log",  
+				success:function(data) {
+					$("#network_table").html(data); 
+				}
+			});
+		}
+		function loopback(){
+			$.ajax({
+				url:"data/permission.log",  
+				success:function(data) {
+					var proc = $("#proc_list").find(":selected").text();
+					var res = data;
+					if(proc != "") { 
+						res = "";
+						var lines = data.split("\n");
+						for (i = 0; i < lines.length; i += 1) {
+							if(lines[i].indexOf(proc) > -1 || lines[i].indexOf("th") > -1) {
+								res = res + lines[i] +'\n';
+							}
+						}
+					}
+					$("#permission_table").html(res); 
+				}
+			});
+			$.ajax({
+				url:"data/network.log",  
+				success:function(data) {
+					$("#network_table").html(data); 
+				}
+			});
+		}
+
+		function setPacket(str){
+			$("#packetContent").html(str);
+		}
+
+		function onBodyLoad(){
+			update_bc(-1);
+			update_net(-1);
+			update_permission(-1);
+			setInterval(loopback_bc, 3000);
+			setInterval(loopback_net, 3000);
+			setInterval(loopback, 5000);
+		}
+
+		</script>
+	</head>
+	<body onload="onBodyLoad()">
+		<div class = "container" id = "navigator">
+			<center><h1>Demos for Android ShadowVM</h1></center>
+		</div>
+		<div class = "container" id = "body">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#bc-tab" aria-controls="bc-tab" role="tab" data-toggle="tab">Branch Coverage</a>
+				</li>
+				<li role="presentation">
+					<a href="#net-tab" aria-controls="net-tab" role="tab" data-toggle="tab">Network track</a>
+				</li>
+				<li role="presentation">
+					<a href="#permission-tab" aria-controls="permission-tab" role="tab" data-toggle="tab">Permission Usage</a>
+				</li>
+			</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="bc-tab">
+			<div class = "col-md-3">
+				<div id="bc">
+					<h3><a href="#">Branch coverage</a></h2>
+					<div id="bc-details">
+						<ol>
+							<li>
+							<a href="#" onclick="update_bc(0)">instrumentation</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_bc(1)">analysis</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_bc(2)">token history</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_bc(3)">overall report</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-9" id = "dashboard-bc">
+				<div id = "code_bc0">
+					<?prettify lang=java?>
+					<pre id = "bc_code0" style="font-size:9px">
+					</pre>
+				</div>
+				<div id = "code_bc1">
+					<?prettify lang=java?>
+					<pre id = "bc_code1" style="font-size:9px">
+					</pre>
+				</div>
+				<div id = "bc_single">
+					<table id = "bc_single_table" class="table table-condensed table-bordered table-striped" >
+					</table>
+				</div>
+				<div id = "bc_overall">
+					<table id="bc_overall_table" class="table table-condensed table-bordered table-striped" >
+					</table>
+				</div>
+			</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="net-tab">
+			<div class = "col-md-3">
+				<div id="net">
+					<h3><a href="#">Network track</a></h2>
+					<div id="net-details">
+						<ol>
+							<li>
+							<a href="#" onclick="update_net(0)">instrumentation</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_net(1)">analysis</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_net(2)">report</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-9" id = "dashboard-net">
+				<div id = "code_net0">
+					<?prettify lang=java?>
+					<pre id="net_code0" style="font-size:9px">
+					</pre>
+				</div>
+				<div id = "code_net1">
+					<?prettify lang=java?>
+					<pre id="net_code1" style="font-size:9px">
+					</pre>
+				</div>
+				<div id = "network">
+					<table class="table table-condensed table-bordered table-striped" id="network_table" >
+					</table>
+				</div>
+			</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="permission-tab">
+
+			<div class = "col-md-3">
+				<div id="permission_left">
+					<h3><a href="#">Permissions</a></h2>
+					<div id="permission-details">
+						<ol>
+							<li>
+							<a href="#" onclick="update_permission(0)">instrumentation</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_permission(1)">analysis</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_permission(2)">report</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-9" id = "dashboard-permission">
+				<div id = "code_permission0">
+					<?prettify lang=java?>
+					<pre style="font-size:9px" id="permission_code0">
+					</pre>
+				</div>
+				<div id = "code_permission1">
+					<?prettify lang=java?>
+					<pre style="font-size:9px" id="permission_code1">
+					</pre>
+				</div>
+				<div id = "permission">
+					<select class="form-control input-lg" id="proc_list" onchange="loopback()">
+						<option></option>
+						<option>pixelrush.xphonefree</option>
+						<option>ch.usi.dag.android.example</option>
+						<option>com.android.phone</option>
+						<option>system_server</option>
+					</select>
+					<table class="table table-condensed table-bordered table-striped" id="permission_table" >
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="stack" tabindex="-1" role="dialog" aria-labelledby="packetLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">call stack</h4>
+				</div>
+				<div class="modal-body" id="callstack">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="packet" tabindex="-1" role="dialog" aria-labelledby="packetLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">packet details</h4>
+				</div>
+				<div class="modal-body" id="packetContent">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
