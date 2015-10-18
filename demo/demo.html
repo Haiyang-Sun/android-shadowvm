@@ -10,7 +10,6 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="css/prettify.css">
 		<script>
-		setInterval(loopback, 2000);
 		$.ajax({
 			url:"data/bc0.java",  
 			success:function(data) {
@@ -64,10 +63,10 @@
 				$("#bc_single").hide();
 			}
 			if(bc_option == 3) {
-				$("#bc_overall_table").show();
+				$("#bc_overall").show();
 				loopback_bc();
 			} else {
-				$("#bc_overall_table").hide();
+				$("#bc_overall").hide();
 			}
 		}
 		function update_net(net_option){
@@ -81,7 +80,7 @@
 				$("#code_net1").hide();
 			if(net_option == 2) {
 				$("#network_table").show();
-				loopback();
+				loopback_net();
 			} else {
 				$("#network_table").hide();
 			}
@@ -103,21 +102,33 @@
 			}
 		}
 
-		function loopback_bc(){
+		function updatesingle(){
 			$.ajax({
 				url:"data/branch-takens.log",  
 				success:function(data) {
 					$("#bc_single_table").html(data); 
 				}
 			});
+		}
+
+		function loopback_bc(){
 			$.ajax({
 				url:"data/branch-overall.log",  
 				success:function(data) {
 					$("#bc_overall_table").html(data); 
 				}
 			});
+			updatesingle();
 		}
 
+		function loopback_net(){
+			$.ajax({
+				url:"data/network.log",  
+				success:function(data) {
+					$("#network_table").html(data); 
+				}
+			});
+		}
 		function loopback(){
 			$.ajax({
 				url:"data/permission.log",  
@@ -149,10 +160,12 @@
 		}
 
 		function onBodyLoad(){
-			loopback();
 			update_bc(-1);
 			update_net(-1);
 			update_permission(-1);
+			setInterval(loopback_bc, 3000);
+			setInterval(loopback_net, 3000);
+			setInterval(loopback, 5000);
 		}
 
 		</script>
