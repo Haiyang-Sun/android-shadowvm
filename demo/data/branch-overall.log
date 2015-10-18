@@ -1,0 +1,19 @@
+<tr><th>process</th><th>class name</th><th>method signature</th><th>total branches</th><th>covered branches</th><th>coverage</th></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>a.(SharedPreferences$Editor;)V</td><td>10</td><td>10</td><td>100.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>k.()I</td><td>5</td><td>1</td><td>20.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>a.(SharedPreferences;)V</td><td>38</td><td>27</td><td>71.05%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>g.()Z</td><td>6</td><td>2</td><td>33.33%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>r.()J</td><td>6</td><td>1</td><td>16.66%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bn</td><td>a.(I)Z</td><td>6</td><td>5</td><td>83.33%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/h</td><td>a.(Uri;)V</td><td>2</td><td>2</td><td>100.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bk</td><td>b.(I)V</td><td>2</td><td>1</td><td>50.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bk</td><td>a.(Z)V</td><td>10</td><td>3</td><td>30.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bk</td><td>b.(Z)V</td><td>8</td><td>2</td><td>25.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bj</td><td>b.(I)Z</td><td>2</td><td>1</td><td>50.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bj</td><td>a.(SharedPreferences;)V</td><td>4</td><td>1</td><td>25.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bj</td><td>a.(SharedPreferences$Editor;)V</td><td>10</td><td>2</td><td>20.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bj</td><td>d.()Z</td><td>28</td><td>1</td><td>3.57%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>pixelrush/xphonefree/a/bi</td><td>a.(Uri;)V</td><td>4</td><td>3</td><td>75.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>b/b/a/a/a/a/a</td><td><clinit>.()V</td><td>2</td><td>1</td><td>50.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>b/b/a/a/a/a/a</td><td>a.([BI[BI[B)I</td><td>4</td><td>3</td><td>75.0%</td></tr>
+<tr><td>pixelrush.xphonefree(1660)</td><td>b/b/a/a/a/a/a</td><td>a.([BII[B)[B</td><td>30</td><td>16</td><td>53.33%</td></tr>
