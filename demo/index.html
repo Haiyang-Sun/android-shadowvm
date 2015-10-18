@@ -7,7 +7,9 @@
 		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="google-code-prettify/run_prettify.js"></script>
+		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="google-code-prettify/prettify.css">
 		<link rel="stylesheet" type="text/css" href="css/prettify.css">
 		<script>
 		$.ajax({
@@ -17,9 +19,9 @@
 			}
 		});
 		$.ajax({
-			url:"data/bc0.java",  
+			url:"data/bc1.java",  
 			success:function(data) {
-				$("#bc_code0").html(data); 
+				$("#bc_code1").html(data); 
 			}
 		});
 		$.ajax({
@@ -166,6 +168,7 @@
 			setInterval(loopback_bc, 3000);
 			setInterval(loopback_net, 3000);
 			setInterval(loopback, 5000);
+			prettyPrint();
 		}
 
 		</script>
@@ -211,13 +214,11 @@
 			</div>
 			<div class = "col-md-9" id = "dashboard-bc">
 				<div id = "code_bc0">
-					<?prettify lang=java?>
-					<pre id = "bc_code0" style="font-size:9px">
+					<pre class="prettyprint" id = "bc_code0" style="font-size:10px">
 					</pre>
 				</div>
 				<div id = "code_bc1">
-					<?prettify lang=java?>
-					<pre id = "bc_code1" style="font-size:9px">
+					<pre class="prettyprint" id = "bc_code1" style="font-size:10px">
 					</pre>
 				</div>
 				<div id = "bc_single">
@@ -252,12 +253,12 @@
 			<div class = "col-md-9" id = "dashboard-net">
 				<div id = "code_net0">
 					<?prettify lang=java?>
-					<pre id="net_code0" style="font-size:9px">
+					<pre id="net_code0" style="font-size:10px">
 					</pre>
 				</div>
 				<div id = "code_net1">
 					<?prettify lang=java?>
-					<pre id="net_code1" style="font-size:9px">
+					<pre id="net_code1" style="font-size:10px">
 					</pre>
 				</div>
 				<div id = "network">
@@ -289,12 +290,12 @@
 			<div class = "col-md-9" id = "dashboard-permission">
 				<div id = "code_permission0">
 					<?prettify lang=java?>
-					<pre style="font-size:9px" id="permission_code0">
+					<pre style="font-size:10px" id="permission_code0">
 					</pre>
 				</div>
 				<div id = "code_permission1">
 					<?prettify lang=java?>
-					<pre style="font-size:9px" id="permission_code1">
+					<pre style="font-size:10px" id="permission_code1">
 					</pre>
 				</div>
 				<div id = "permission">
