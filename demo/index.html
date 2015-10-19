@@ -113,6 +113,7 @@
 		function updatesingle(){
 			$.ajax({
 				url:"data/branch-takens.log",  
+				cache: false,
 				success:function(data) {
 					$("#bc_single_table").html(data); 
 				}
@@ -122,6 +123,7 @@
 		function loopback_bc(){
 			$.ajax({
 				url:"data/branch-overall.log",  
+				cache: false,
 				success:function(data) {
 					$("#bc_overall_table").html(data); 
 				}
@@ -132,6 +134,7 @@
 		function loopback_net(){
 			$.ajax({
 				url:"data/network.log",  
+				cache: false,
 				success:function(data) {
 					$("#network_table").html(data); 
 				}
@@ -140,6 +143,7 @@
 		function loopback(){
 			$.ajax({
 				url:"data/permission.log",  
+				cache: false,
 				success:function(data) {
 					var proc = $("#proc_list").find(":selected").text();
 					var res = data;
@@ -153,12 +157,6 @@
 						}
 					}
 					$("#permission_table").html(res); 
-				}
-			});
-			$.ajax({
-				url:"data/network.log",  
-				success:function(data) {
-					$("#network_table").html(data); 
 				}
 			});
 		}
@@ -336,7 +334,7 @@
 			</div>
 			<div class = "col-md-9" id = "dashboard-config">
 				<div id = "code_config1">
-					<pre id="config_code1" style="font-size:10px">
+					<pre id="config_code1" style="font-size:12px">
 					</pre>
 				</div>
 			</div>
