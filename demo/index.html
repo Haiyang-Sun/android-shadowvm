@@ -48,6 +48,12 @@
 				$("#permission_code1").html(data); 
 			}
 		});
+		$.ajax({
+			url:"data/svm.prop",  
+			success:function(data) {
+				$("#config_code1").html(data); 
+			}
+		});
 
 		function update_bc(bc_option){
 			if(bc_option == 0)
@@ -165,7 +171,6 @@
 			update_bc(-1);
 			update_net(-1);
 			update_permission(-1);
-			prettyPrint();
 			setInterval(loopback_bc, 3000);
 			setInterval(loopback_net, 3000);
 			setInterval(loopback, 5000);
@@ -187,6 +192,9 @@
 				</li>
 				<li role="presentation">
 					<a href="#permission-tab" aria-controls="permission-tab" role="tab" data-toggle="tab">Permission Usage</a>
+				</li>
+				<li role="presentation">
+					<a href="#config-tab" aria-controls="config-tab" role="tab" data-toggle="tab">Configuration</a>
 				</li>
 			</ul>
 		<div class="tab-content">
@@ -307,6 +315,29 @@
 					</select>
 					<table class="table table-condensed table-bordered table-striped" id="permission_table" >
 					</table>
+				</div>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="config-tab">
+			<div class = "col-md-3">
+				<div id="config">
+					<h3><a href="#">Configuration</a></h2>
+					<div id="config-details">
+						<ol>
+							<li>
+							<a href="data/config.xml">Server side</a>
+							</li>
+							<li>
+							<a href="#">Android side</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-9" id = "dashboard-config">
+				<div id = "code_config1">
+					<pre id="config_code1" style="font-size:10px">
+					</pre>
 				</div>
 			</div>
 		</div>

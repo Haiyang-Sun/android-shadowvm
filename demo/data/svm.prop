@@ -1,0 +1,10 @@
+enable_usb 0
+instr_port 6667
+instr_ip 10.0.2.2
+analysis_port 6668
+analysis_ip 10.0.2.2
+process_config com.android.phone 1
+process_config system_server 1
+process_config ch.usi.dag.android.example 1
+process_config pixelrush.xphonefree 1
+end

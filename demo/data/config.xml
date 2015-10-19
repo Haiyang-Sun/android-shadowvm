@@ -1,0 +1,24 @@
+<config>
+	<dexes> 
+		<dex>
+			<name>ch.usi.dag.android.example-1.apk</name>
+			<bypass>false</bypass>
+			<dislclass>demo/ipc/disl/MethodEntryDiSLClass.class,demo/ipc/disl/MethodCallDiSLClass.class,demo/branchcoverage/disl/DiSLClass.class</dislclass>
+		</dex>
+		<dex>
+			<name>pixelrush.xphonefree-1.apk</name>
+			<bypass>false</bypass>
+			<dislclass>demo/ipc/disl/MethodEntryDiSLClass.class,demo/ipc/disl/MethodCallDiSLClass2.class,demo/branchcoverage/disl/DiSLClass.class</dislclass>
+		</dex>
+		<dex>
+			<name>core.jar</name>
+			<bypass>false</bypass>
+			<dislclass>demo/netdiagnose/disl/DiSLClass.class</dislclass>
+		</dex>
+		<dex>
+			<name>framework.jar</name>
+			<bypass>false</bypass>
+			<dislclass>demo/ipc/disl/PermissionDiSLClass.class</dislclass>
+		</dex>
+	</dexes>
+</config>
