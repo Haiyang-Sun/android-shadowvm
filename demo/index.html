@@ -49,11 +49,44 @@
 			}
 		});
 		$.ajax({
+			url:"data/callstack0.java",  
+			success:function(data) {
+				$("#callstack_code0").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/callstack1.java",  
+			success:function(data) {
+				$("#callstack_code1").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/callstack2.java",  
+			success:function(data) {
+				$("#callstack_code2").html(data); 
+			}
+		});
+		$.ajax({
 			url:"data/svm.prop",  
 			success:function(data) {
 				$("#config_code1").html(data); 
 			}
 		});
+
+		function update_callstack(option){
+			if(option == 0)
+				$("#code_callstack0").show();
+			else
+				$("#code_callstack0").hide();
+			if(option == 1)
+				$("#code_callstack1").show();
+			else
+				$("#code_callstack1").hide();
+			if(option == 2)
+				$("#code_callstack2").show();
+			else
+				$("#code_callstack2").hide();
+		}
 
 		function update_bc(bc_option){
 			if(bc_option == 0)
@@ -169,6 +202,7 @@
 			update_bc(-1);
 			update_net(-1);
 			update_permission(-1);
+			update_callstack(-1);
 			setInterval(loopback_bc, 3000);
 			setInterval(loopback_net, 3000);
 			setInterval(loopback, 5000);
@@ -190,6 +224,9 @@
 				</li>
 				<li role="presentation">
 					<a href="#permission-tab" aria-controls="permission-tab" role="tab" data-toggle="tab">Permission Usage</a>
+				</li>
+				<li role="presentation">
+					<a href="#callstack-tab" aria-controls="callstack-tab" role="tab" data-toggle="tab">Call Stack Dump</a>
 				</li>
 				<li role="presentation">
 					<a href="#config-tab" aria-controls="config-tab" role="tab" data-toggle="tab">Configuration</a>
@@ -313,6 +350,40 @@
 					</select>
 					<table class="table table-condensed table-bordered table-striped" id="permission_table" >
 					</table>
+				</div>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="callstack-tab">
+			<div class = "col-md-3">
+				<div id="callstack">
+					<h3><a href="#">Call stack dump</a></h2>
+					<div id="config-details">
+						<ol>
+							<li>
+							<a href="#" onclick=update_callstack(0)>instrument method body</a>
+							</li>
+							<li>
+							<a href="#" onclick=update_callstack(1)>instrument for each invocation</a>
+							</li>
+							<li>
+							<a href="#" onclick=update_callstack(2)>analysis</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class = "col-md-9" id = "dashboard-callstack">
+				<div id = "code_callstack0">
+					<pre id="callstack_code0" style="font-size:10px">
+					</pre>
+				</div>
+				<div id = "code_callstack1">
+					<pre id="callstack_code1" style="font-size:10px">
+					</pre>
+				</div>
+				<div id = "code_callstack2">
+					<pre id="callstack_code2" style="font-size:10px">
+					</pre>
 				</div>
 			</div>
 		</div>
