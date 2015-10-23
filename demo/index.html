@@ -66,12 +66,6 @@
 				$("#callstack_code2").html(data); 
 			}
 		});
-		$.ajax({
-			url:"data/svm.prop",  
-			success:function(data) {
-				$("#config_code1").html(data); 
-			}
-		});
 
 		function update_callstack(option){
 			if(option == 0)
@@ -109,8 +103,17 @@
 			} else {
 				$("#bc_overall").hide();
 			}
+			if(bc_option == -1) {
+				$("#bc_intro").show();
+			} else {
+				$("#bc_intro").hide();
+			}
 		}
 		function update_net(net_option){
+			if(net_option == -1)
+				$("#net_intro").show();
+			else
+				$("#net_intro").hide();
 			if(net_option == 0)
 				$("#code_net0").show();
 			else
@@ -127,6 +130,10 @@
 			}
 		}
 		function update_permission(permission_option){
+			if(permission_option == -1)
+				$("#permission_intro").show();
+			else
+				$("#permission_intro").hide();
 			if(permission_option == 0)
 				$("#code_permission0").show();
 			else
@@ -141,6 +148,16 @@
 			} else {
 				$("#permission").hide();
 			}
+		}
+		function update_config(option){
+			if(option == 0)
+				$("#server_part").show();
+			else
+				$("#server_part").hide();
+			if(option == 1)
+				$("#android_part").show();
+			else
+				$("#android_part").hide();
 		}
 
 		function updatesingle(){
@@ -203,6 +220,7 @@
 			update_net(-1);
 			update_permission(-1);
 			update_callstack(-1);
+			update_config(-1);
 			setInterval(loopback_bc, 3000);
 			setInterval(loopback_net, 3000);
 			setInterval(loopback, 5000);
@@ -217,6 +235,9 @@
 		<div class = "container" id = "body">
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">
+					<a href="#config-tab" aria-controls="config-tab" role="tab" data-toggle="tab">Configuration</a>
+				</li>
+				<li role="presentation">
 					<a href="#bc-tab" aria-controls="bc-tab" role="tab" data-toggle="tab">Branch Coverage</a>
 				</li>
 				<li role="presentation">
@@ -228,17 +249,17 @@
 				<li role="presentation">
 					<a href="#callstack-tab" aria-controls="callstack-tab" role="tab" data-toggle="tab">Call Stack Dump</a>
 				</li>
-				<li role="presentation">
-					<a href="#config-tab" aria-controls="config-tab" role="tab" data-toggle="tab">Configuration</a>
-				</li>
 			</ul>
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="bc-tab">
+			<div role="tabpanel" class="tab-pane fade" id="bc-tab">
 			<div class = "col-md-3">
 				<div id="bc">
 					<h3><a href="#">Branch coverage</a></h2>
 					<div id="bc-details">
 						<ol>
+							<li>
+							<a href="#" onclick="update_bc(-1)">introduction</a>
+							</li>
 							<li>
 							<a href="#" onclick="update_bc(0)">instrumentation</a>
 							</li>
@@ -257,11 +278,11 @@
 			</div>
 			<div class = "col-md-9" id = "dashboard-bc">
 				<div id = "code_bc0">
-					<pre class="prettyprint" id = "bc_code0" style="font-size:10px">
+					<pre class="prettyprint" id = "bc_code0" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "code_bc1">
-					<pre class="prettyprint" id = "bc_code1" style="font-size:10px">
+					<pre class="prettyprint" id = "bc_code1" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "bc_single">
@@ -272,6 +293,17 @@
 					<table id="bc_overall_table" class="table table-condensed table-bordered table-striped" >
 					</table>
 				</div>
+				<div id = "bc_intro">
+				<h3> Introduction to branch coverage </h3>
+				<div>
+					<dl>
+						<dt>Branch coverage is an important analysis to record program runtime execution.</dt>
+						<dd>By instrumentation, we are able to collect information of branch token when application is running</dd>
+						<dd>With the static information collected at instrumentation time, we will be able to give a coverage report on the fly</dd>
+						<dd>Since we provide full coverage, it's also possible to collect coverage report for the library code. </dd>
+					</dl>
+				</div>
+				</div>
 			</div>
 			</div>
 			<div role="tabpanel" class="tab-pane fade" id="net-tab">
@@ -280,6 +312,9 @@
 					<h3><a href="#">Network track</a></h2>
 					<div id="net-details">
 						<ol>
+							<li>
+							<a href="#" onclick="update_net(-1)">introduction</a>
+							</li>
 							<li>
 							<a href="#" onclick="update_net(0)">instrumentation</a>
 							</li>
@@ -294,14 +329,25 @@
 				</div>
 			</div>
 			<div class = "col-md-9" id = "dashboard-net">
+				<div id = "net_intro">
+				<div>
+				<h3>Introduction to network track analysis</h3>
+					<dl>
+						<dt>It can be used to track all network-related operations(Java), and record all connection built and data sent or received</dt>
+						<dd>Android application with android.permission.INTERNET, can access to the network. When an application is running, it's hard to detect network use.</dd>
+						<dd>Java provides various way to write to a network connection (Writer, OutputStream, ...), and Android also provides a rich range of network API. Detecting network usage by static analysis is limited</dd>
+						<dd>In this case study, we are instrumenting the library code related to network connection (libcore.io.IoBridge), bind, send, and receive. We maintain the data sent/received for each connection, which can be used for further analysis</dd>
+					</dl>
+				</div>
+				</div>
 				<div id = "code_net0">
 					<?prettify lang=java?>
-					<pre id="net_code0" style="font-size:10px">
+					<pre id="net_code0" style="font-size:11px">
 					</pre>
 				</div>
 				<div id = "code_net1">
 					<?prettify lang=java?>
-					<pre id="net_code1" style="font-size:10px">
+					<pre id="net_code1" style="font-size:11px">
 					</pre>
 				</div>
 				<div id = "network">
@@ -318,6 +364,9 @@
 					<div id="permission-details">
 						<ol>
 							<li>
+							<a href="#" onclick="update_permission(-1)">introduction</a>
+							</li>
+							<li>
 							<a href="#" onclick="update_permission(0)">instrumentation</a>
 							</li>
 							<li>
@@ -331,14 +380,32 @@
 				</div>
 			</div>
 			<div class = "col-md-9" id = "dashboard-permission">
+				<div id = "permission_intro">
+				<h3>Introduction to permission detection</h3>
+				<div>
+					<dl>
+						<dt>
+							Not all of the applications can have access to some sensitive APIs on Android, since they are protected by the permission system. When an application invokes an API which requires some permission, it will send a request to system server via Binder. Only permited by the system server, the application will be able to continue the API invocation.
+						</dt>
+						<dd>
+							Code obfuscation and reflection have made static analysis difficult for detecting runtime permission usage.
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							The check of the permission is out of the app process. How to build the connection between a permission check at the system server and an API call at the app process is important to get a full track of permission usage at runtime. </dt>
+						<dd>
+						With our support for IPC Binder event, we are able to do control flow analysis among different processes. We will keep the causal order of the original events at our analysis server. In this case, we are able to get the report for permission usage on the fly.
+						</dd>
+					</dl>
+				</div>
+				</div>
 				<div id = "code_permission0">
-					<?prettify lang=java?>
-					<pre style="font-size:10px" id="permission_code0">
+					<pre style="font-size:12px" id="permission_code0">
 					</pre>
 				</div>
 				<div id = "code_permission1">
-					<?prettify lang=java?>
-					<pre style="font-size:10px" id="permission_code1">
+					<pre style="font-size:12px" id="permission_code1">
 					</pre>
 				</div>
 				<div id = "permission">
@@ -374,39 +441,72 @@
 			</div>
 			<div class = "col-md-9" id = "dashboard-callstack">
 				<div id = "code_callstack0">
-					<pre id="callstack_code0" style="font-size:10px">
+					<pre id="callstack_code0" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "code_callstack1">
-					<pre id="callstack_code1" style="font-size:10px">
+					<pre id="callstack_code1" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "code_callstack2">
-					<pre id="callstack_code2" style="font-size:10px">
+					<pre id="callstack_code2" style="font-size:12px">
 					</pre>
 				</div>
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane fade" id="config-tab">
+		<div role="tabpanel" class="tab-pane fade in active" id="config-tab">
 			<div class = "col-md-3">
 				<div id="config">
-					<h3><a href="#">Configuration</a></h2>
+					<h3><a href="#">Configurations</a></h2>
 					<div id="config-details">
 						<ol>
 							<li>
-							<a href="data/config.xml">Server side</a>
+							<a href="#" onclick="update_config(0)">Server part</a>
 							</li>
 							<li>
-							<a href="#">Android side</a>
+							<a href="#" onclick="update_config(1)">Android part</a> 
 							</li>
 						</ol>
 					</div>
 				</div>
 			</div>
 			<div class = "col-md-9" id = "dashboard-config">
-				<div id = "code_config1">
-					<pre id="config_code1" style="font-size:12px">
-					</pre>
+				<div id = "server_part">
+					<dl>
+						<dt>core.jar</dt>
+						<dd>instrument libcore.io.IoBridge to track network operation</dd>
+					</dl>
+					<dl>
+						<dt>framework.jar</dt>
+						<dd>instrument android.app.ActivityManager to detect all permissions checked by system server</dd>
+					</dl>
+					<dl>
+						<dt>target applications(example, xphonefree)</dt>
+						<dd>instrument method entries and method exits to provide runtime stack information</dd>
+						<dd>instrument all branch related bytecode to get branch coverage report</dd>
+					</dl>
+				</div>
+				<div id = "android_part">
+					<dl>
+						<dt>instrumentation server</dt>
+						<dd>ip: 10.0.0.2</dd>
+						<dd>port: 6667</dd>
+					</dl>
+					<dl>
+						<dt>analysis server</dt>
+						<dd>ip: 10.0.0.2</dd>
+						<dd>port: 6668</dd>
+					</dl>
+					<dl>
+						<dt>system_server</dt>
+						<dd>track permission check, and IPC events</dt>
+						<dt>com.android.phone</dt>
+						<dd>track permission check, and IPC events</dt>
+						<dt>pixelrush.xphonefree</dt>
+						<dd>target app process</dt>
+						<dt>ch.usi.dag.android.example</dt>
+						<dd>target app process</dt>
+					</dl>
 				</div>
 			</div>
 		</div>

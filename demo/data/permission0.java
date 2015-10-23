@@ -1,12 +1,4 @@
-package ch.usi.dag.demo.ipc.disl;
-
-import ch.usi.dag.demo.ipc.analysis.IPCAnalysisStub;
-import ch.usi.dag.disl.annotation.Before;
-import ch.usi.dag.disl.marker.BodyMarker;
-import ch.usi.dag.disl.processorcontext.ArgumentProcessorContext;
-import ch.usi.dag.disl.processorcontext.ArgumentProcessorMode;
-import ch.usi.dag.disl.staticcontext.MethodStaticContext;
-/* for framework.jar */
+/* applied on for framework.jar */
 public class PermissionDiSLClass {
 
     /* instrument the framework library for every check permission functions
@@ -14,14 +6,18 @@ public class PermissionDiSLClass {
      *
      * This takes effects on framework.jar
      */
-    @Before (marker = BodyMarker.class,guard = Guard.PermissionGuard.class)
+    @Before (
+			marker = BodyMarker.class,
+			//guard = Guard.PermissionGuard.class
+			scope = "ActivityManager.checkComponentPermission"
+			)
 	public static void detectPermission (MethodStaticContext msc, ArgumentProcessorContext pc) {
-    	final Object [] args = pc.getArgs (ArgumentProcessorMode.METHOD_ARGS);
+        Object [] args = pc.getArgs (ArgumentProcessorMode.METHOD_ARGS);
 		if(args[0] != null) {
-		    final String permisssionUsed = args[0].toString ();
-   			if(permisssionUsed!=null) {
-   			    IPCAnalysisStub.permission_used (permisssionUsed);
-   			}
+		    String permisssionUsed = args[0].toString ();
+    		if(permisssionUsed!=null) {
+    		    IPCAnalysisStub.permission_used (permisssionUsed);
+    		}
 		}
 	}
 }

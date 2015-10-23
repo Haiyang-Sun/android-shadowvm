@@ -1,10 +1,3 @@
-package ch.usi.dag.demo.callstack.disl;
-
-import ch.usi.dag.demo.ipc.analysis.CallStackAnalysisStub;
-import ch.usi.dag.disl.annotation.After;
-import ch.usi.dag.disl.annotation.Before;
-import ch.usi.dag.disl.marker.BytecodeMarker;
-
 /*
  * for generating runtime stack
  * Take effects on app code

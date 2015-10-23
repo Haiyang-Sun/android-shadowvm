@@ -1,16 +1,8 @@
-package ch.usi.dag.demo.callstack.disl;
-
-import ch.usi.dag.demo.ipc.analysis.CallStackAnalysisStub;
-import ch.usi.dag.disl.annotation.After;
-import ch.usi.dag.disl.annotation.Before;
-import ch.usi.dag.disl.marker.BodyMarker;
-
 /*
  * for generating runtime stack
  * Take effects on app code
  */
 public class MethodEntryDiSLClass {
-
     /* every time entering a method */
     @Before (
         marker = BodyMarker.class,
@@ -18,7 +10,6 @@ public class MethodEntryDiSLClass {
     public static void before_enter (final CallContext msc) {
         CallStackAnalysisStub.boundary_start (msc.thisMethodFullName ());
     }
-
     /* every time leaving a method */
     @After (
         marker = BodyMarker.class,

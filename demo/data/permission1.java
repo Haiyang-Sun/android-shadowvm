@@ -1,61 +1,40 @@
-package ch.usi.dag.demo.ipc.analysis;
-
-import java.util.List;
-
-import ch.usi.dag.demo.ipc.analysis.lib.IPCLogger;
-import ch.usi.dag.demo.ipc.analysis.lib.ThreadState;
-import ch.usi.dag.disldroidreserver.msg.ipc.NativeThread;
-import ch.usi.dag.disldroidreserver.msg.ipc.TransactionInfo;
-import ch.usi.dag.disldroidreserver.remoteanalysis.RemoteIPCAnalysis;
-import ch.usi.dag.disldroidreserver.shadow.Context;
-import ch.usi.dag.disldroidreserver.shadow.ShadowString;
-
-
 public class IPCAnalysis extends RemoteIPCAnalysis {
-
     public static String analysisTag = "PermissionUsage";
     public void permissionUsed (
-        final Context ctx, final int tid, final ShadowString permissionName) {
-        final List<ThreadState> callers = ThreadState.getCallers (ctx, tid);
-        for(final ThreadState caller:callers){
+        Context ctx, int tid, ShadowString permissionName) {
+        List<ThreadState> callers = ThreadState.getCallers (ctx, tid);
+        for(ThreadState caller:callers){
             caller.addPermission(permissionName.toString ());
         }
     }
-
     @Override
     public void onRequestSent (
-        final TransactionInfo info, final NativeThread client, final Context ctx) {
+        TransactionInfo info, NativeThread client, Context ctx) {
 
-        final ThreadState clientState = ThreadState.get (client);
+        ThreadState clientState = ThreadState.get (client);
         clientState.recordRequestSent(client,info);
     }
-
     @Override
     public void onRequestReceived (
-        final TransactionInfo info, final NativeThread client,
-        final NativeThread server, final Context ctx) {
-        final ThreadState clientState = ThreadState.get (client);
+        TransactionInfo info, NativeThread client,
+        NativeThread server, Context ctx) {
+        ThreadState clientState = ThreadState.get (client);
         clientState.waitForRequestSent (info, server);
-        final ThreadState serverState = ThreadState.get (server);
+        ThreadState serverState = ThreadState.get (server);
         serverState.recordRequestReceived(client, server, info);
     }
-
     @Override
     public void onResponseSent (
-        final TransactionInfo info, final NativeThread client, final NativeThread server, final Context ctx) {
-            final ThreadState serverState = ThreadState.get (server);
+        TransactionInfo info, NativeThread client, NativeThread server, Context ctx) {
+            ThreadState serverState = ThreadState.get (server);
             serverState.recordResponseSent(client, server, info);
     }
-
     @Override
     public void onResponseReceived (
-        final TransactionInfo info, final NativeThread client,
-        final NativeThread server, final Context ctx) {
-            final ThreadState serverState = ThreadState.get (server);
-            final ThreadState clientState = ThreadState.get (client);
-            if(!clientState.checkResponseReceivedValid(info,server)) {
-                return;
-            }
+        TransactionInfo info, NativeThread client, NativeThread server, Context ctx) {
+        ThreadState serverState = ThreadState.get (server);
+        ThreadState clientState = ThreadState.get (client);
+        if(clientState.checkResponseReceivedValid(info,server)) {
             serverState.waitForResponseSent (info, client);
             if(clientState.getPermissionCount()>0){
                 IPCLogger.reportPermissionUsage (clientState);
@@ -63,4 +42,5 @@ public class IPCAnalysis extends RemoteIPCAnalysis {
             }
             clientState.recordResponseReceived(client, server, info);
         }
+    }
 }
