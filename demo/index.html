@@ -25,6 +25,12 @@
 			}
 		});
 		$.ajax({
+			url:"data/bc2.java",  
+			success:function(data) {
+				$("#bc_code2").html(data); 
+			}
+		});
+		$.ajax({
 			url:"data/network0.java",  
 			success:function(data) {
 				$("#net_code0").html(data); 
@@ -37,6 +43,12 @@
 			}
 		});
 		$.ajax({
+			url:"data/network2.java",  
+			success:function(data) {
+				$("#net_code2").html(data); 
+			}
+		});
+		$.ajax({
 			url:"data/permission0.java",  
 			success:function(data) {
 				$("#permission_code0").html(data); 
@@ -46,6 +58,12 @@
 			url:"data/permission1.java",  
 			success:function(data) {
 				$("#permission_code1").html(data); 
+			}
+		});
+		$.ajax({
+			url:"data/permission2.java",  
+			success:function(data) {
+				$("#permission_code2").html(data); 
 			}
 		});
 		$.ajax({
@@ -66,6 +84,12 @@
 				$("#callstack_code2").html(data); 
 			}
 		});
+		$.ajax({
+			url:"data/callstack3.java",  
+			success:function(data) {
+				$("#callstack_code3").html(data); 
+			}
+		});
 
 		function update_callstack(option){
 			if(option == 0)
@@ -80,6 +104,10 @@
 				$("#code_callstack2").show();
 			else
 				$("#code_callstack2").hide();
+			if(option == 3)
+				$("#code_callstack3").show();
+			else
+				$("#code_callstack3").hide();
 		}
 
 		function update_bc(bc_option){
@@ -91,6 +119,10 @@
 				$("#code_bc1").show();
 			else
 				$("#code_bc1").hide();
+			if(bc_option == 4)
+				$("#code_bc2").show();
+			else
+				$("#code_bc2").hide();
 			if(bc_option == 2) {
 				$("#bc_single").show();
 				loopback_bc();
@@ -122,6 +154,10 @@
 				$("#code_net1").show();
 			else
 				$("#code_net1").hide();
+			if(net_option == 3)
+				$("#code_net2").show();
+			else
+				$("#code_net2").hide();
 			if(net_option == 2) {
 				$("#network_table").show();
 				loopback_net();
@@ -142,6 +178,10 @@
 				$("#code_permission1").show();
 			else
 				$("#code_permission1").hide();
+			if(permission_option == 3)
+				$("#code_permission2").show();
+			else
+				$("#code_permission2").hide();
 			if(permission_option == 2) {
 				$("#permission").show();
 				loopback();
@@ -264,6 +304,9 @@
 							<a href="#" onclick="update_bc(0)">instrumentation</a>
 							</li>
 							<li>
+							<a href="#" onclick="update_bc(4)">analysis stub</a>
+							</li>
+							<li>
 							<a href="#" onclick="update_bc(1)">analysis</a>
 							</li>
 							<li>
@@ -283,6 +326,10 @@
 				</div>
 				<div id = "code_bc1">
 					<pre class="prettyprint" id = "bc_code1" style="font-size:12px">
+					</pre>
+				</div>
+				<div id = "code_bc2">
+					<pre class="prettyprint" id = "bc_code2" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "bc_single">
@@ -319,6 +366,9 @@
 							<a href="#" onclick="update_net(0)">instrumentation</a>
 							</li>
 							<li>
+							<a href="#" onclick="update_net(3)">analysis stub</a>
+							</li>
+							<li>
 							<a href="#" onclick="update_net(1)">analysis</a>
 							</li>
 							<li>
@@ -350,6 +400,11 @@
 					<pre id="net_code1" style="font-size:11px">
 					</pre>
 				</div>
+				<div id = "code_net2">
+					<?prettify lang=java?>
+					<pre id="net_code2" style="font-size:11px">
+					</pre>
+				</div>
 				<div id = "network">
 					<table class="table table-condensed table-bordered table-striped" id="network_table" >
 					</table>
@@ -368,6 +423,9 @@
 							</li>
 							<li>
 							<a href="#" onclick="update_permission(0)">instrumentation</a>
+							</li>
+							<li>
+							<a href="#" onclick="update_permission(3)">analysis stub</a>
 							</li>
 							<li>
 							<a href="#" onclick="update_permission(1)">analysis</a>
@@ -408,6 +466,10 @@
 					<pre style="font-size:12px" id="permission_code1">
 					</pre>
 				</div>
+				<div id = "code_permission2">
+					<pre style="font-size:12px" id="permission_code2">
+					</pre>
+				</div>
 				<div id = "permission">
 					<span>Filter by </span><select class="form-control input" id="proc_list" onchange="loopback()">
 						<option></option>
@@ -434,6 +496,9 @@
 							<a href="#" onclick=update_callstack(1)>instrument for each invocation</a>
 							</li>
 							<li>
+							<a href="#" onclick=update_callstack(3)>analysis stub</a>
+							</li>
+							<li>
 							<a href="#" onclick=update_callstack(2)>analysis</a>
 							</li>
 						</ol>
@@ -447,6 +512,10 @@
 				</div>
 				<div id = "code_callstack1">
 					<pre id="callstack_code1" style="font-size:12px">
+					</pre>
+				</div>
+				<div id = "code_callstack3">
+					<pre id="callstack_code3" style="font-size:12px">
 					</pre>
 				</div>
 				<div id = "code_callstack2">
