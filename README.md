@@ -24,20 +24,6 @@ Our framework makes these benefits available to Android developers, thus simplif
 
 [![Download nexus5-emulator-image.zip]](http://195.176.181.79/downloads/nexus-image.zip)
 
-####Or build from source
-
-Including :
-
-* $SOURCE_ROOT/external/ShadowVMService => implementation of the shadowvm service (https://github.com/jysunhy/ShadowVMLibrary.git)
-
-* $SOURCE_ROOT/system/core/init.rc => update init.rc to auto-start the shadowvm service (https://github.com/jysunhy/ShadowVMLibrary/blob/master/init.rc)
-
-* $SOURCE_ROOT/dalvik => dalvik patch to emit events of interest for instrumentation and analysis (https://github.com/jysunhy/dalvik.git)
-
-* $SOURCE_ROOT/native/libs(include)/binder => emit binder IPC events (https://github.com/jysunhy/AndroidFrameworkNativeBinder.git)
-
-* at $SOURCE_ROOT, do "mmm external/ShadowVMService; make -j4 WITH_DEXPREOPT=false"
-
 ####Example, run the demo analysis on the Intel emulator
 * start instrumentation server by running StartDisl.sh
 
