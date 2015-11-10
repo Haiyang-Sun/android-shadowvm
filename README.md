@@ -34,7 +34,7 @@ Our framework makes these benefits available to Android developers, thus simplif
 * run in the exacted folder: emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -data ./userdata.img -kernel ./kernel-qemu -sdcard ./sdcard.img -memory 2048
 	(you may need to create a sdcard.img yourself or download one from http://195.176.181.79/downloads/sdcard.img)
 
-* configurations for the demos are already there
+* configurations for the demos are already there (if not, push the configuration svm.prop to device' folder /data/data, which can be downloaded from http://195.176.181.79/downloads/svm.prop);
 
 ##Demo result
 *[![open demo page]](http://haiyang-sun.github.io/demo/index.html)
