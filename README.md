@@ -29,19 +29,29 @@ Instructions for building the android image from source code is under constructi
 ##Quick start, run the demo analysis on the Intel emulator
 
 ###Start the instrumentation server
-start instrumentation server by running StartDisl.sh
+```{r, engine='bash', count_lines}
+./StartDisl.sh
+```
 
 ###Start the analysis server
-start analysis server by running StartSVM.sh
+```{r, engine='bash', count_lines}
+./StartSVM.sh
+```
 
 ###Start the emulator
-bash: emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -data ./userdata.img -kernel ./kernel-qemu -sdcard ./sdcard.img -memory 2048
+```{r, engine='bash', count_lines}
+unzip x86-emulator-image.zip -d emulator-folder
+cd emulator-folder
+emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -data ./userdata.img -kernel ./kernel-qemu -sdcard ./sdcard.img -memory 2048
+```
 
 (you need to create a sdcard.img yourself)
 
 ###Push the analysis configuration to the emulator
-bash: adb push svm.prop /data/data/svm.prop
-[download the demo configuration](http://195.176.181.79/downloads/svm.prop)
+```{r, engine='bash', count_lines}
+wget http://195.176.181.79/downloads/svm.prop
+adb push svm.prop /data/data/svm.prop
+```
 
 ###Demo result
 [open demo page](http://haiyang-sun.github.io/demo/index.html)
