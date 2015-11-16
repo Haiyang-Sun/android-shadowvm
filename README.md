@@ -10,19 +10,19 @@ Our framework makes these benefits available to Android developers, thus simplif
 
 ###Get instrumentation/analysis servers
 ####Build from source code
-[![Download DiSL-Android-src.zip](http://195.176.181.79/downloads/android-disl-src.tar.gz)]
+[Download DiSL-Android-src.zip](http://195.176.181.79/downloads/android-disl-src.tar.gz)
 
 * use ant to build the source code (Requires openjdk >= 8)
 
 ####Get binaries only
-[![Download DiSL-Android-bin.zip](http://195.176.181.79/downloads/android-disl-bin.tar.gz)]
+[Download DiSL-Android-bin.zip](http://195.176.181.79/downloads/android-disl-bin.tar.gz)
 
 ###Get Our Android image 
-[![Download arm-emulator-image.zip](http://195.176.181.79/downloads/arm-emulator.tar.gz)]
+[Download arm-emulator-image.zip](http://195.176.181.79/downloads/arm-emulator.tar.gz)
 
-[![Download x86-emulator-image.zip](http://195.176.181.79/downloads/intel-emulator.tar.gz)]
+[Download x86-emulator-image.zip](http://195.176.181.79/downloads/intel-emulator.tar.gz)
 
-[![Download nexus5-emulator-image.zip](http://195.176.181.79/downloads/nexus-image.zip)]
+[Download nexus5-emulator-image.zip](http://195.176.181.79/downloads/nexus-image.zip)
 
 Instructions for building the android image from source code is under construction
 
@@ -41,9 +41,9 @@ bash: emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -dat
 
 ###Push the analysis configuration to the emulator
 bash: adb push svm.prop /data/data/svm.prop
-[![download the demo configuration](http://195.176.181.79/downloads/svm.prop)]
+[download the demo configuration](http://195.176.181.79/downloads/svm.prop)
 
 ###Demo result
-[![open demo page](http://haiyang-sun.github.io/demo/index.html)]
+[open demo page](http://haiyang-sun.github.io/demo/index.html)
 
-[![open demo video]()]
+[open demo video]()
