@@ -10,33 +10,40 @@ Our framework makes these benefits available to Android developers, thus simplif
 
 ###Get instrumentation/analysis servers
 ####Build from source code
-[![Download DiSL-Android-src.zip]](http://195.176.181.79/downloads/android-disl-src.tar.gz)
+[![Download DiSL-Android-src.zip](http://195.176.181.79/downloads/android-disl-src.tar.gz)]
 
-* use ant to build the source code (Requires openjdk >= 7)
+* use ant to build the source code (Requires openjdk >= 8)
 
 ####Get binaries only
-[![Download DiSL-Android-bin.zip]](http://195.176.181.79/downloads/android-disl-bin.tar.gz)
+[![Download DiSL-Android-bin.zip](http://195.176.181.79/downloads/android-disl-bin.tar.gz)]
 
-###Get shadowvm android
-[![Download arm-emulator-image.zip]](http://195.176.181.79/downloads/intel-emulator.tar.gz)
+###Get Our Android image 
+[![Download arm-emulator-image.zip](http://195.176.181.79/downloads/arm-emulator.tar.gz)]
 
-[![Download x86-emulator-image.zip]](http://195.176.181.79/downloads/intel-emulator.tar.gz)
+[![Download x86-emulator-image.zip](http://195.176.181.79/downloads/intel-emulator.tar.gz)]
 
-[![Download nexus5-emulator-image.zip]](http://195.176.181.79/downloads/nexus-image.zip)
+[![Download nexus5-emulator-image.zip](http://195.176.181.79/downloads/nexus-image.zip)]
 
-####Example, run the demo analysis on the Intel emulator
-* start instrumentation server by running StartDisl.sh
+Instructions for building the android image from source code is under construction
 
-* start analysis server by running StartSVM.sh
+##Quick start, run the demo analysis on the Intel emulator
 
-* (To run on nexus, you also need to do port forwarding by running PortForward.sh)
+###Start the instrumentation server
+start instrumentation server by running StartDisl.sh
 
-* run in the exacted folder: emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -data ./userdata.img -kernel ./kernel-qemu -sdcard ./sdcard.img -memory 2048
-	(you may need to create a sdcard.img yourself or download one from http://195.176.181.79/downloads/sdcard.img)
+###Start the analysis server
+start analysis server by running StartSVM.sh
 
-* configurations for the demos are already there (if not, push the configuration svm.prop to device' folder /data/data, which can be downloaded from http://195.176.181.79/downloads/svm.prop);
+###Start the emulator
+bash: emulator64-x86 -sysdir ./ -system ./system.img -ramdisk ./ramdisk.img -data ./userdata.img -kernel ./kernel-qemu -sdcard ./sdcard.img -memory 2048
 
-##Demo result
-*[![open demo page]](http://haiyang-sun.github.io/demo/index.html)
+(you need to create a sdcard.img yourself)
 
-*[![open demo video]]()
+###Push the analysis configuration to the emulator
+bash: adb push svm.prop /data/data/svm.prop
+[![download the demo configuration](http://195.176.181.79/downloads/svm.prop)]
+
+###Demo result
+[![open demo page](http://haiyang-sun.github.io/demo/index.html)]
+
+[![open demo video]()]
